@@ -8,9 +8,17 @@ namespace KataBingoCard
 {
     public class BingoCard
     {
-        public static Array GetCard()
+        public static string[] GetCard()
         {
-            return new string[24];
+            var bingoCard = new List<string>
+            {
+                "B",
+                "I",
+                "N",
+                "G",
+                "O"
+            };
+            return bingoCard.ToArray();
         }
     }
 }

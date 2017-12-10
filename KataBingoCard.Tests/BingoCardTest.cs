@@ -10,9 +10,14 @@ namespace KataBingoCard.Tests
     public class BingoCardTest
     {
         [Test]
-        public void GetCard_When_GetCard_Should_Return24Numbers()
+        public void When_GetCard_Should_contain_BINGO()
         {
-            Assert.AreEqual(24, BingoCard.GetCard().Length);
+            var expecteds = new List<string>() { "B", "I", "N", "G", "O" };
+            var bingoCard = BingoCard.GetCard();
+            foreach (var expected in expecteds)
+            {
+                Assert.IsTrue(new List<string>(bingoCard).Contains(expected));
+            }
         }
     }
 }
