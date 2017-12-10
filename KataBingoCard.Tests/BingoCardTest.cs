@@ -40,5 +40,14 @@ namespace KataBingoCard.Tests
         {
             Assert.AreEqual(expected, BingoCard.GetCard().Count(x => x.Contains(column)));
         }
+
+        [Test]
+        public void NumbersAreOrderedByColumn()
+        {
+            var columns = string.Join("", BingoCard.GetCard().ToList()
+                .Select(x => x.Substring(0, 1)).ToArray());
+
+            Assert.IsTrue(Regex.IsMatch(columns, "^[B]*[I]*[N]*[G]*[O]*$"));
+        }
     }
 }
