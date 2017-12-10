@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace KataBingoCard
 {
-    public class Class1
+    public class BingoCard
     {
+        public static Array GetCard()
+        {
+            return new string[24];
+        }
     }
 }
