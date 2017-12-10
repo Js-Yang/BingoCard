@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ExpectedObjects;
 using NUnit.Framework;
 
 namespace KataBingoCard.Tests
@@ -84,11 +85,21 @@ namespace KataBingoCard.Tests
 
             Assert.IsTrue(isRandom, "Unlikely result, is the list ordered?");
         }
+
         [Test]
         public void EachNumberOnCardIsUnique()
         {
             var card = BingoCard.GetCard();
             Assert.AreEqual(card.Length, card.ToList().Distinct().Count());
+        }
+
+        [Test]
+        public void GetCard_Twice_Should_Be_Different_Set()
+        {
+            var card1 = BingoCard.GetCard().ToExpectedObject();
+            var card2 = BingoCard.GetCard();
+
+            card1.ShouldNotEqual(card2);
         }
     }
 }

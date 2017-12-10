@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class BingoCard
 {
     private static readonly List<string> Letters = new List<string> { "B", "I", "N", "G", "O" };
-    private static int NextRange = 1;
-
+    private static int BaseRange = 15;
+    private static Random rnd = new Random();
     public static string[] GetCard()
     {
-        NextRange = 1;
         var bingoCard = new List<string>();
+
+        var start = 0;
+        var end = 15;
         foreach (var letter in Letters)
         {
             var level = 5;
@@ -17,19 +20,32 @@ public class BingoCard
                 level--;
             }
 
-            AddNumbersWith(level, bingoCard, letter);
+            AddNumbersWith(level, bingoCard, letter, start, end);
+            start += BaseRange;
+            end += BaseRange;
         }
 
         return bingoCard.ToArray();
     }
 
-    private static void AddNumbersWith(int level, List<string> bingoCard, string letter)
+    private static void AddNumbersWith(int level, List<string> bingoCard, string letter, int start, int end)
     {
-        for (var i = level * 2; i >= 1; i -= 2)
+        var numbers = new List<int?>();
+        for (var i = start; i < end; i++)
         {
-            var number = i + NextRange;
-            bingoCard.Add(letter + number);
+            numbers.Add(i);
         }
-        NextRange += 15;
+
+        for (var i = 0; i < level; i++)
+        {
+            var randPosition = 0;
+            do
+            {
+                randPosition = rnd.Next(1, 15);
+            } while (numbers[randPosition] == null);
+
+            bingoCard.Add(letter + numbers[randPosition]);
+            numbers[randPosition] = null;
+        }
     }
 }
