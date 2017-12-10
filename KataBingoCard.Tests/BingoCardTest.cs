@@ -30,21 +30,15 @@ namespace KataBingoCard.Tests
                 Assert.IsTrue(Regex.IsMatch(number, "^[BINGO][0-9]*$"));
             }
         }
-
-        [Test]
-        public void When_GetCard_Should_Return_Length_Equal_To_24()
+        
+        [TestCase("B", 5, TestName = "B Count Should be 5")]
+        [TestCase("I", 5, TestName = "I Count Should be 5")]
+        [TestCase("N", 4, TestName = "N Count Should be 4")]
+        [TestCase("G", 5, TestName = "G Count Should be 5")]
+        [TestCase("O", 5, TestName = "O Count Should be 5")]
+        public void GetCard_Check_Array_Count(string column, int expected)
         {
-            Assert.AreEqual(24, BingoCard.GetCard().Length);
-        }
-
-        [TestCase("B",5,TestName = "B Count Should be 5")]
-        [TestCase("I",5,TestName = "I Count Should be 5")]
-        [TestCase("N",4,TestName = "N Count Should be 4")]
-        [TestCase("G",5,TestName = "G Count Should be 5")]
-        [TestCase("O",5,TestName = "O Count Should be 5")]
-        public void GetCard_Check_Array_Count(string charactor, int expected)
-        {
-            Assert.AreEqual(expected, BingoCard.GetCard().Count(x => x.Contains(charactor)));
+            Assert.AreEqual(expected, BingoCard.GetCard().Count(x => x.Contains(column)));
         }
     }
 }

@@ -8,17 +8,31 @@ namespace KataBingoCard
 {
     public class BingoCard
     {
+        private static readonly List<string> Letters = new List<string>() {"B", "I", "N", "G", "O"};
+
         public static string[] GetCard()
         {
-            var bingoCard = new List<string>
+            var bingoCard = new List<string>();
+            foreach (var letter in Letters)
             {
-                "B10", "B10", "B10", "B10", "B10",
-                "I10", "I10", "I10", "I10", "I10",
-                "N10", "N10", "N10", "N10",
-                "G10", "G10", "G10", "G10", "G10",
-                "O10", "O10", "O10", "O10", "O10",
-            };
+                var level = 5;
+                if (letter == "N")
+                {
+                    level--;
+                }
+
+                AddNumbersWith(level, bingoCard, letter);
+            }
+
             return bingoCard.ToArray();
+        }
+
+        private static void AddNumbersWith(int level, List<string> bingoCard, string letter)
+        {
+            for (var i = 0; i < level; i++)
+            {
+                bingoCard.Add(letter + "10");
+            }
         }
     }
 }
