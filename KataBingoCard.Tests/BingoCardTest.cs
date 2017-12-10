@@ -30,5 +30,11 @@ namespace KataBingoCard.Tests
                 Assert.IsTrue(Regex.IsMatch(number, "^[BINGO][0-9]*$"));
             }
         }
+
+        [Test]
+        public void When_GetCard_Should_Return_Length_Equal_To_24()
+        {
+            Assert.AreEqual(24, BingoCard.GetCard().Length);
+        }
     }
 }
