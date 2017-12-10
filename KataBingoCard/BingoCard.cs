@@ -10,14 +10,7 @@ namespace KataBingoCard
     {
         public static string[] GetCard()
         {
-            var bingoCard = new List<string>
-            {
-                "B",
-                "I",
-                "N",
-                "G",
-                "O"
-            };
+            var bingoCard = new List<string> {"B10", "I10", "N10", "G10", "O10"};
             return bingoCard.ToArray();
         }
     }
