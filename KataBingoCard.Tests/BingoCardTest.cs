@@ -84,5 +84,11 @@ namespace KataBingoCard.Tests
 
             Assert.IsTrue(isRandom, "Unlikely result, is the list ordered?");
         }
+        [Test]
+        public void EachNumberOnCardIsUnique()
+        {
+            var card = BingoCard.GetCard();
+            Assert.AreEqual(card.Length, card.ToList().Distinct().Count());
+        }
     }
 }
