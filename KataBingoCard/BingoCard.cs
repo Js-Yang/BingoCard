@@ -47,21 +47,15 @@ public class BingoCard
 
     private static int? RandomTakeFrom(List<int?> numbers)
     {
-        var randPosition = GetRandPosition(numbers);
-        var rndNumber = numbers[randPosition];
-        numbers[randPosition] = null;
-        return rndNumber;
-    }
-
-    private static int GetRandPosition(List<int?> numbers)
-    {
         while (true)
         {
             var rnd = new Random(Guid.NewGuid().GetHashCode());
             var randPosition = rnd.Next(1, 15);
             if (numbers[randPosition] != null)
             {
-                return randPosition;
+                var rndNumber = numbers[randPosition];
+                numbers[randPosition] = null;
+                return rndNumber;
             }
         }
     }
