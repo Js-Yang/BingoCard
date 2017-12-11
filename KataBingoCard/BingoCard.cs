@@ -4,27 +4,30 @@ using System.Collections.Generic;
 public class BingoCard
 {
     private static readonly List<string> Letters = new List<string> { "B", "I", "N", "G", "O" };
+    private static int BaseRange = 15;
 
     public static string[] GetCard()
     {
         var bingoCard = new List<string>();
         foreach (var letter in Letters)
         {
-            AddRndNumbersBy(letter, bingoCard);
+            bingoCard.AddRange(GetRndNumbersBy(letter));
         }
 
         return bingoCard.ToArray();
     }
 
-    private static void AddRndNumbersBy(string letter, List<string> bingoCard)
+    private static List<string> GetRndNumbersBy(string letter)
     {
-        var BaseRange = 15;
+        var numbersOfLetter = new List<string>();
         var index = Letters.IndexOf(letter);
         var numbers = GetNumbersBetween(index * BaseRange, (index + 1) * BaseRange);
         for (var i = 0; i < GetLevel(letter); i++)
         {
-            bingoCard.Add(letter + RandomTakeFrom(numbers));
+            numbersOfLetter.Add(letter + RandomTakeFrom(numbers));
         }
+
+        return numbersOfLetter;
     }
 
     private static int GetLevel(string letter)
