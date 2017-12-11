@@ -10,17 +10,17 @@ public class BingoCard
         var bingoCard = new List<string>();
         foreach (var letter in Letters)
         {
-            AddRndNumbersBy(bingoCard, letter);
+            AddRndNumbersBy(letter, bingoCard);
         }
 
         return bingoCard.ToArray();
     }
 
-    private static void AddRndNumbersBy(List<string> bingoCard, string letter)
+    private static void AddRndNumbersBy(string letter, List<string> bingoCard)
     {
         var BaseRange = 15;
         var index = Letters.IndexOf(letter);
-        var numbers = GenerateNumbers(index * BaseRange, (index + 1) * BaseRange);
+        var numbers = GetNumbersBetween(index * BaseRange, (index + 1) * BaseRange);
         for (var i = 0; i < GetLevel(letter); i++)
         {
             bingoCard.Add(letter + RandomTakeFrom(numbers));
@@ -32,7 +32,7 @@ public class BingoCard
         return letter == "N" ? 4 : 5;
     }
 
-    private static List<int?> GenerateNumbers(int start, int end)
+    private static List<int?> GetNumbersBetween(int start, int end)
     {
         var numbers = new List<int?>();
         for (var i = start; i < end; i++)
