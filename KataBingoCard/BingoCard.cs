@@ -4,12 +4,11 @@ using System.Collections.Generic;
 public class BingoCard
 {
     private static readonly List<string> Letters = new List<string> { "B", "I", "N", "G", "O" };
-    private static int BaseRange = 15;
-    private static Random rnd = new Random();
+
     public static string[] GetCard()
     {
         var bingoCard = new List<string>();
-
+        var BaseRange = 15;
         var start = 0;
         var end = 15;
         foreach (var letter in Letters)
@@ -30,15 +29,12 @@ public class BingoCard
 
     private static void AddNumbersWith(int level, List<string> bingoCard, string letter, int start, int end)
     {
-        var numbers = new List<int?>();
-        for (var i = start; i < end; i++)
-        {
-            numbers.Add(i);
-        }
+        var numbers = InitNumbers(start, end);
 
+        var rnd = new Random(Guid.NewGuid().GetHashCode());
         for (var i = 0; i < level; i++)
         {
-            var randPosition = 0;
+            int randPosition;
             do
             {
                 randPosition = rnd.Next(1, 15);
@@ -47,5 +43,15 @@ public class BingoCard
             bingoCard.Add(letter + numbers[randPosition]);
             numbers[randPosition] = null;
         }
+    }
+
+    private static List<int?> InitNumbers(int start, int end)
+    {
+        var numbers = new List<int?>();
+        for (var i = start; i < end; i++)
+        {
+            numbers.Add(i);
+        }
+        return numbers;
     }
 }
