@@ -30,19 +30,24 @@ public class BingoCard
     private static void AddNumbersWith(int level, List<string> bingoCard, string letter, int start, int end)
     {
         var numbers = InitNumbers(start, end);
-
-        var rnd = new Random(Guid.NewGuid().GetHashCode());
+        
         for (var i = 0; i < level; i++)
         {
-            int randPosition;
-            do
-            {
-                randPosition = rnd.Next(1, 15);
-            } while (numbers[randPosition] == null);
-
-            bingoCard.Add(letter + numbers[randPosition]);
-            numbers[randPosition] = null;
+            bingoCard.Add(letter + GetRandomNumber(numbers));
         }
+    }
+
+    private static int? GetRandomNumber(List<int?> numbers)
+    {
+        int randPosition;
+        do
+        {
+            var rnd = new Random(Guid.NewGuid().GetHashCode());
+            randPosition = rnd.Next(1, 15);
+        } while (numbers[randPosition] == null);
+        var rndNumber = numbers[randPosition];
+        numbers[randPosition] = null;
+        return rndNumber;
     }
 
     private static List<int?> InitNumbers(int start, int end)
